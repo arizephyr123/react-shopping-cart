@@ -4,6 +4,7 @@ import data from "./data";
 
 //Contexts
 import { ProductContext } from "./contexts/ProductContext";
+import { CartContext } from "./contexts/CartContext";
 
 // Components
 import Navigation from "./components/Navigation";
@@ -23,27 +24,25 @@ function App() {
 
   return (
     <div className="App">
-      <Navigation cart={cart} />
       <ProductContext.Provider value={{ products, addItem }}>
-		{/* Routes */}
-		
-        {/* Before */}
-        {/* <Route
+        <CartContext.Provider value={{cart}}>
+          <Navigation/>
+          {/* Routes */}
+
+          {/* Before */}
+          {/* <Route
           exact
           path="/"
           render={() => <Products products={products} addItem={addItem} />}
 		/> */}
-        {/* After */}
-        <Route
-          exact
-          path="/"
-          component={Products}
-        />
+          {/* After */}
+          <Route exact path="/" component={Products} />
 
-        {/* Before */}
-        {/* <Route path="/cart" render={() => <ShoppingCart cart={cart} />} /> */}
-        {/* After */}
-        <Route path="/cart" component={ShoppingCart} />
+          {/* Before */}
+          {/* <Route path="/cart" render={() => <ShoppingCart cart={cart} />} /> */}
+          {/* After */}
+          <Route path="/cart" component={ShoppingCart}/>
+        </CartContext.Provider>
       </ProductContext.Provider>
     </div>
   );
